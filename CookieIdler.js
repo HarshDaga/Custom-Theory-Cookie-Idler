@@ -415,25 +415,25 @@ let baseCost = [
 ];
 //Ideally, 1/100 base
 let bcps = [
-    7,//0
-    310,//1
-    5.3e4,//2
-    7.4e7,//3
-    4.05e10,//4
-    1.4e12,//5
-    1.6e18,//6
-    4.4e28,//7
-    1.58e38,//8
-    5.6e49,//9
-    6.66e58,//10
-    6.5e72,//11
-    9.15e79,//12
-    BF("4.9e96"),//13
-    BF("2.1e123"),//14
-    BF("2.2e150"),//15
-    BF("1.1e170"),//16
-    BF("8.3e183"),//17
-    BF("6.4e188"),//18
+    70,//0
+    3100,//1
+    5.3e6,//2
+    7.4e9,//3
+    4.05e15,//4
+    1.4e19,//5
+    1.6e28,//6
+    4.4e33,//7
+    1.58e45,//8
+    5.6e59,//9
+    6.66e68,//10
+    6.5e79,//11
+    BF("9.15e89"),//12
+    BF("4.9e106"),//13
+    BF("2.1e133"),//14
+    BF("2.2e160"),//15
+    BF("1.1e180"),//16
+    BF("8.3e188"),//17
+    BF("6.4e194"),//18
 ];
 //Getting the info of a building but in a function
 var getInf = (index,am) => {
@@ -496,8 +496,8 @@ var getCookieP = (level) => {
     for (let i = 0; i < cookieTinName.length; i++) {
         res *= BigP(cookietP[i],cookiet[i].level);
     }
-    if (CookieS.level != 0) res *= (BigNumber.TWO + lump.value).log2().pow(1.5);
-    if (CookieH.level != 0) res *= (BigNumber.TEN + hc.value).log10().pow(1.25);
+    if (CookieS.level != 0) res *= (BigNumber.TWO + lump.value).log2().pow(4.5);
+    if (CookieH.level != 0) res *= (BigNumber.TEN + hc.value).log10().pow(5);
     if (CookieC.level != 0 && (cookie.value > BigNumber.ZERO)) res *= (BigNumber.TEN + cookie.value).log10().pow(0.9);
     if (DivineD.level != 0) res *= BigNumber.TWO.pow(DivineD.level);
     res *= BigP(1.01,invest.level);
@@ -553,9 +553,9 @@ var kittyPower = (level) => {
     if (level >= 10) {
         ret += BF((level - 9) * 0.3);
     }
-    ret += level * 0.2;
+    ret += level * 2;
     if(artArt.level > 2){
-        ret=BigP(ret,1.5+(achCount * 0.01));
+        ret=BigP(ret,1.5+(achCount * 0.1));
     }
     return ret;
 };
@@ -838,7 +838,7 @@ const buildingUpgradeName = [
     "Get an extra IQ Point",
 ];
 let buildingUpgradeMult = [
-    250, 3.5, 60, 125, 59, 35, 8, 17, 25, 23, 21, 20, 15, 25, 10, 10, 9, 7, 5, 7,
+    2500, 35, 600, 1250, 590, 350, 800, 170, 250, 230, 210, 200, 150, 250, 100, 100, 90, 70, 50, 70,
 ];
 
 //==HC Upgrade==
@@ -1422,7 +1422,7 @@ var init = () => {
     //Heavenly Cookies
     let baseI = 1000000;
     {
-        cookieTin = theory.createPermanentUpgrade(baseI,hc,new ExponentialCost(25, ML2(1e6)));
+        cookieTin = theory.createPermanentUpgrade(baseI,hc,new ExponentialCost(25, ML2(1e2)));
         cookieTin.getDescription = () =>
             (bInfo==1)?`Unlock \$TP_{${cookieTin.level}}\$`:
             cookieTinName[
@@ -1715,7 +1715,7 @@ var calcCPS = () => {
     milk = BF(5000) * achCount;
     HPS = BF(hc.value).pow(0.9) * (recom.level+((artArt.level > 7)?10:0));
     LPS = (recom.level+((artArt.level > 7)?10:0)) * 0.01;
-    let kp = kittyPower(kitty.level) * BF(BF(100 + milk) / BF(100));
+    let kp = kittyPower(kitty.level) * BF(BF(10 + milk) / BF(10));
     for (let i = 0; i < 19; i++) {
         if(building[i].level == 0){
             arrcps[i]=0;
