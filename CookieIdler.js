@@ -1712,7 +1712,7 @@ var calcCPS = () => {
     buip = getbuip();
     CPS = BF(0);
     bc = BF(0);
-    milk = BigNumber.FIVE * achCount;
+    milk = BF(5000) * achCount;
     HPS = BF(hc.value).pow(0.9) * (recom.level+((artArt.level > 7)?10:0));
     LPS = (recom.level+((artArt.level > 7)?10:0)) * 0.01;
     let kp = kittyPower(kitty.level) * BF(BF(100 + milk) / BF(100));
